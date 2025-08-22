@@ -1,8 +1,11 @@
+from algorithms.similarity_score_person import retrieve_similar_names
+
 import taipy.gui.builder as tgb
 
 
 def look_for_person(state):
-    pass
+    with state as s:
+        s.df_similar_person = retrieve_similar_names(s.person_name, s.threshold_person)
 
 
 with tgb.Page() as find_person_page:
@@ -21,3 +24,6 @@ with tgb.Page() as find_person_page:
     tgb.button(
         "Look for Person", on_action=look_for_person, class_name="fullwidth plain"
     )
+
+    with tgb.part():
+        tgb.table("{df_similar_person}", rebuild=True, downloadable=True)

@@ -1,3 +1,4 @@
+import pandas as pd
 from pages import *
 
 from taipy.gui import Gui
@@ -12,8 +13,9 @@ stylekit = {"color_primary": "#DF2D8F", "color_secondary": "#3a3a3a"}
 
 if __name__ == "__main__":
     person_name = ""
-    threshold_person = 95
+    threshold_person = 0.90
     name_type = "Full Name"
+    df_similar_person = pd.DataFrame()
 
     gui = Gui(pages=tool_pages, css_file="./css/main.css")
     gui.run(
