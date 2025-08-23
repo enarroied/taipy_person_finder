@@ -17,6 +17,9 @@ if __name__ == "__main__":
     name_type = "Full Name"
     df_similar_person = pd.DataFrame()
 
+    file_for_comparison = None
+    df_people_for_comparison = None
+
     gui = Gui(pages=tool_pages, css_file="./css/main.css")
     gui.run(
         title="Taipy 🔎 Person Finder",
