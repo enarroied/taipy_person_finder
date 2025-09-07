@@ -1,7 +1,7 @@
 [project]
 name = "taipy-person-finder"
 version = "0.1.0"
-description = "Add your description here"
+description = "An application that performs person search using Jaro-Winkler similarity scores, as well as other string similarity methods."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -9,4 +9,9 @@ dependencies = [
     "faker==37.5.3",
     "marimo==0.14.17",
     "taipy==4.1.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.12.12",
 ]

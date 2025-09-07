@@ -1,3 +1,3 @@
-from .find_people import find_people_page
-from .find_person import find_person_page
-from .root import root
+from .find_people import find_people_page as find_people_page
+from .find_person import find_person_page as find_person_page
+from .root import root as root
