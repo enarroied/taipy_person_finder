@@ -30,8 +30,8 @@ def _(fake, num_rows, pd):
         "email": [fake.email() for _ in range(num_rows)],
     }
 
-    df = pd.DataFrame(data)
-    df.to_parquet("../src/data/fake_data.parquet", index=False)
+    df_fake_data = pd.DataFrame(data)
+    df_fake_data.to_parquet("../src/data/fake_data.parquet", index=False)
 
     print(
         f"Created and saved DataFrame with {num_rows} rows to ../data/fake_data.parquet"
