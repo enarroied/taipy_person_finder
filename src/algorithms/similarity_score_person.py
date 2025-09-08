@@ -21,10 +21,16 @@ class QueryRunner:
 
 
 class RetrieveSimilarNames(QueryRunner):
-    def run(self, person_name: str, threshold: float) -> pd.DataFrame:
+    def run(
+        self,
+        person_name: str,
+        threshold: float,
+        data_source: str = "read_parquet('./data/fake_data.parquet')",
+    ) -> pd.DataFrame:
         name_to_look_for = "".join(person_name.split())
         return self.execute(
             "find_person.sql.j2",
             person_name=name_to_look_for,
             threshold=threshold,
+            data_source=data_source,
         )

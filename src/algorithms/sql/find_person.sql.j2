@@ -2,7 +2,7 @@ SELECT *,
     jaro_winkler_similarity('{{ person_name }}', first_name || family_name) AS jaro_winkler_similarity_score,
     levenshtein('{{ person_name }}', first_name || family_name) AS levenshtein__similarity_score
 FROM 
-    read_parquet('./data/fake_data.parquet')
+    {{ data_source }}
 WHERE 
     jaro_winkler_similarity_score > {{ threshold }}
 ORDER BY jaro_winkler_similarity_score DESC
