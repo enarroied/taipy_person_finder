@@ -1,11 +1,12 @@
-from algorithms.similarity_score_person import retrieve_similar_names
+from algorithms.similarity_score_person import RetrieveSimilarNames
 
 import taipy.gui.builder as tgb
 
 
 def look_for_person(state):
+    runner = RetrieveSimilarNames()
     with state as s:
-        s.df_similar_person = retrieve_similar_names(s.person_name, s.threshold_person)
+        s.df_similar_person = runner.run(s.person_name, s.threshold_person)
 
 
 with tgb.Page() as find_person_page:
