@@ -23,7 +23,7 @@ if __name__ == "__main__":
     gui = Gui(pages=tool_pages, css_file="./css/main.css")
     gui.run(
         title="Taipy 🔎 Person Finder",
-        # favicon="./img/logo.png",
+        favicon="./img/logo.png",
         stylekit=stylekit,
         use_reloader=True,
     )
