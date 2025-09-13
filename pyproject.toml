@@ -7,7 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "duckdb==1.3.2",
     "faker==37.5.3",
-    "marimo==0.14.17",
+    "marimo==0.15.3",
     "taipy==4.1.0",
 ]
 
