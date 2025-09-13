@@ -6,7 +6,11 @@ from algorithms import RetrieveSimilarNames
 def look_for_person(state):
     runner = RetrieveSimilarNames()
     with state as s:
-        s.df_similar_person = runner.run(s.person_name, s.threshold_person)
+        df_similar_person = runner.run(s.person_name, s.threshold_person)
+        df_similar_person["jaro_winkler_similarity_score"] = df_similar_person[
+            "jaro_winkler_similarity_score"
+        ].round(2)
+        s.df_similar_person = df_similar_person
 
 
 with tgb.Page() as find_person_page:
@@ -26,4 +30,4 @@ with tgb.Page() as find_person_page:
     )
 
     with tgb.part():
-        tgb.table("{df_similar_person}", rebuild=True, downloadable=True)
+        tgb.table("{df_similar_person}", rebuild=True, downloadable=True, filter=True)

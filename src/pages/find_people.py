@@ -42,12 +42,16 @@ def look_for_similar_people(state):
     with state as s:
         hold_control(s, message="Lookig for Similar People")
         runner = select_runner(s.file_for_comparison)
-        s.df_similar_people = runner.run(
+        df_similar_people = runner.run(
             data_for_comparison=s.file_for_comparison,
             comparison_first_name=s.column_first_name,
             comparison_family_name=s.column_last_name,
             threshold=s.threshold_people,
         )
+        df_similar_people["jaro_winkler_similarity_score"] = df_similar_people[
+            "jaro_winkler_similarity_score"
+        ].round(2)
+        s.df_similar_people = df_similar_people
         resume_control(s)
 
 
