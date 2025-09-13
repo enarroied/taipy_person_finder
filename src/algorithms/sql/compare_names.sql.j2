@@ -1,0 +1,20 @@
+SELECT 
+    data_source.*,
+    input_data.{{ comparison_first_name }} AS comparison_first_name,
+    input_data.{{ comparison_family_name }} AS comparison_family_name,
+    jaro_winkler_similarity(
+        data_source.first_name || data_source.family_name, 
+        input_data.{{ comparison_first_name }} || input_data.{{ comparison_family_name }}
+    ) AS jaro_winkler_similarity_score,
+    levenshtein(
+        data_source.first_name || data_source.family_name, 
+        input_data.{{ comparison_first_name }} || input_data.{{ comparison_family_name }}
+    ) AS levenshtein_similarity_score
+FROM 
+    {{ data_source }} data_source
+CROSS JOIN 
+    {{ data_for_comparison }} input_data
+WHERE 
+    jaro_winkler_similarity_score > {{ threshold }}
+ORDER BY 
+    jaro_winkler_similarity_score DESC

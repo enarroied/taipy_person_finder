@@ -83,7 +83,7 @@ class RetrieveSimilarNames(QueryRunner):
         threshold: int,
         data_source: str = "read_parquet('./data/fake_data.parquet')",
     ) -> pd.DataFrame:
-        """Execute the jaro_winkler
+        """Execute the comparison query to find similar names
 
         Args:
             person_name (str): name of the person to look for
@@ -101,3 +101,59 @@ class RetrieveSimilarNames(QueryRunner):
             threshold=threshold,
             data_source=data_source,
         )
+
+
+class RetrieveSimilarNamesForFile(QueryRunner):
+    """Executes a query to compare names between two data sources using
+    jaro-winkler similarity and a threshold value."""
+
+    def __init__(self, data_source_type, template_dir: Path | str = None):
+        super().__init__(template_dir)
+        self.data_source_type = data_source_type
+
+    def run(
+        self,
+        data_for_comparison: str,
+        comparison_first_name: str,
+        comparison_family_name: str,
+        threshold: float,
+        data_source: str = "read_parquet('./data/fake_data.parquet')",
+    ) -> pd.DataFrame:
+        """Execute the comparison query between two data sources
+
+        Args:
+            data_for_comparison (str): Path to comparison data file
+            comparison_first_name (str): Column name for first name in comparison data
+            comparison_family_name (str): Column name for family name in comparison data
+            threshold (float): jaro-winkler threshold value
+            data_source (str, optional): Primary data to query. Defaults to
+                "read_parquet('./data/fake_data.parquet')".
+
+        Returns:
+            pd.DataFrame: Result of the SQL query with similarity scores.
+        """
+        sql_statement_for_comparison = (
+            f"{self.data_source_type}('{data_for_comparison}')"
+        )
+        return self.execute(
+            "compare_names.sql.j2",
+            threshold=threshold,
+            data_source=data_source,
+            data_for_comparison=sql_statement_for_comparison,
+            comparison_first_name=comparison_first_name,
+            comparison_family_name=comparison_family_name,
+        )
+
+
+class RetrieveSimilarNamesForCSV(RetrieveSimilarNamesForFile):
+    """Specialized class for comparing with CSV files"""
+
+    def __init__(self, template_dir: Path | str = None):
+        super().__init__("read_csv", template_dir)
+
+
+class RetrieveSimilarNamesForParquet(RetrieveSimilarNamesForFile):
+    """Specialized class for comparing with Parquet files"""
+
+    def __init__(self, template_dir: Path | str = None):
+        super().__init__("read_parquet", template_dir)
