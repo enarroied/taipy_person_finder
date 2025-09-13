@@ -1,7 +1,3 @@
+from .file_and_model_selection import read_data_file as read_data_file
+from .file_and_model_selection import select_runner as select_runner
 from .similarity_score import RetrieveSimilarNames as RetrieveSimilarNames
-from .similarity_score import (
-    RetrieveSimilarNamesForCSV as RetrieveSimilarNamesForCSV,
-)
-from .similarity_score import (
-    RetrieveSimilarNamesForParquet as RetrieveSimilarNamesForParquet,
-)

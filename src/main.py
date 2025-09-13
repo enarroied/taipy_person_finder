@@ -1,7 +1,7 @@
 import pandas as pd
-from pages import find_people_page, find_person_page, root
-
 from taipy.gui import Gui
+
+from pages import find_people_page, find_person_page, root
 
 tool_pages = {
     "/": root,
@@ -14,7 +14,6 @@ stylekit = {"color_primary": "#DF2D8F", "color_secondary": "#3a3a3a"}
 if __name__ == "__main__":
     person_name = ""
     threshold_person = 0.90
-    name_type = "Full Name"
     df_similar_person = pd.DataFrame()
 
     file_for_comparison = None

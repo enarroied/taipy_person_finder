@@ -1,43 +1,7 @@
-from pathlib import Path
-
-import pandas as pd
-from algorithms import RetrieveSimilarNamesForCSV, RetrieveSimilarNamesForParquet
-
 import taipy.gui.builder as tgb
 from taipy.gui import hold_control, notify, resume_control
 
-
-def select_file_type(file_path: str) -> str:
-    path_obj = Path(file_path)
-    if not path_obj.exists():
-        raise FileNotFoundError(f"Error: The file '{file_path}' was not found.")
-    return path_obj.suffix.lower()
-
-
-def select_runner(
-    file_path: str,
-) -> RetrieveSimilarNamesForCSV | RetrieveSimilarNamesForParquet:
-    file_type = select_file_type(file_path)
-    if file_type == ".csv":
-        return RetrieveSimilarNamesForCSV()
-    if file_type == ".parquet":
-        return RetrieveSimilarNamesForParquet()
-    else:
-        raise f"The file type needs to be csv or parquet, found {file_type}"
-
-
-def read_data_file(file_path: str) -> pd.DataFrame:
-    file_extension = select_file_type(file_path)
-    if file_extension == ".csv":
-        try:
-            return pd.read_csv(file_path)
-        except Exception as e:
-            raise IOError(f"Error reading CSV file: {e}")
-    elif file_extension == ".parquet":
-        try:
-            return pd.read_parquet(file_path)
-        except Exception as e:
-            raise IOError(f"Error reading Parquet file: {e}")
+from algorithms import read_data_file, select_runner
 
 
 def _notify_file_failure(state, message):
@@ -84,7 +48,6 @@ def look_for_similar_people(state):
             comparison_family_name=s.column_last_name,
             threshold=s.threshold_people,
         )
-        print(s.df_similar_person.head())
         resume_control(s)
 
 
@@ -108,13 +71,38 @@ with tgb.Page() as find_people_page:
             mode="md",
             class_name="color-primary",
         )
+        tgb.text(
+            """The app will merge first and last name to compare to company data.
+             Your dataset needs to have a first and last name column. Select them
+             below, along with the similarity threshold:
+             """,
+            mode="md",
+            class_name="color-primary",
+        )
         with tgb.layout("1 1 1"):
-            tgb.selector("{column_first_name}", lov="{dataset_colums}", dropdown=True)
-            tgb.selector("{column_last_name}", lov="{dataset_colums}", dropdown=True)
-            tgb.button(
-                label="Find People",
-                on_action=look_for_similar_people,
-                class_name="fullwidth plain",
+            tgb.selector(
+                "{column_first_name}",
+                lov="{dataset_colums}",
+                dropdown=True,
             )
+            tgb.selector(
+                "{column_last_name}",
+                lov="{dataset_colums}",
+                dropdown=True,
+            )
+            tgb.slider(
+                "{threshold_people}",
+                min=0.8,
+                max=1,
+                step=0.05,
+                continuous=False,
+                hover_text="Threshold for Jaro-Winkler Score",
+            )
+
+        tgb.button(
+            label="Find People",
+            on_action=look_for_similar_people,
+            class_name="fullwidth plain",
+        )
 
         tgb.table("{df_similar_people}", rebuild=True, downloadable=True)
