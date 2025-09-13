@@ -1,13 +1,12 @@
 import marimo
 
-__generated_with = "0.14.17"
+__generated_with = "0.15.3"
 app = marimo.App(width="medium")
 
 
 @app.cell
 def _():
     import marimo as mo
-
     return (mo,)
 
 
@@ -20,7 +19,6 @@ def _():
     fake = Faker()
 
     num_rows = 50000
-
     return Faker, fake, num_rows, pd
 
 
@@ -83,16 +81,16 @@ def _(mo):
 def _(Faker):
     Faker.seed(2)
     fake_seed_2 = Faker("fr_FR")
-
-    return (fake_seed_2,)
+    num_rows_query_data = 500
+    return fake_seed_2, num_rows_query_data
 
 
 @app.cell
-def _(fake_seed_2, num_rows, pd):
+def _(fake_seed_2, num_rows_query_data, pd):
     trial_data = {
-        "first_name": [fake_seed_2.first_name() for _ in range(num_rows)],
-        "family_name": [fake_seed_2.last_name() for _ in range(num_rows)],
-        "phone": [fake_seed_2.phone_number() for _ in range(num_rows)],
+        "first_name": [fake_seed_2.first_name() for _ in range(num_rows_query_data)],
+        "family_name": [fake_seed_2.last_name() for _ in range(num_rows_query_data)],
+        "phone": [fake_seed_2.phone_number() for _ in range(num_rows_query_data)],
     }
 
     trial_data = pd.DataFrame(trial_data)
