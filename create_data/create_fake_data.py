@@ -7,6 +7,7 @@ app = marimo.App(width="medium")
 @app.cell
 def _():
     import marimo as mo
+
     return (mo,)
 
 
@@ -81,14 +82,14 @@ def _(mo):
 @app.cell
 def _(Faker):
     Faker.seed(2)
-    fake_seed_2 = Faker('fr_FR')
+    fake_seed_2 = Faker("fr_FR")
 
     return (fake_seed_2,)
 
 
 @app.cell
 def _(fake_seed_2, num_rows, pd):
-    trial_data  = {
+    trial_data = {
         "first_name": [fake_seed_2.first_name() for _ in range(num_rows)],
         "family_name": [fake_seed_2.last_name() for _ in range(num_rows)],
         "phone": [fake_seed_2.phone_number() for _ in range(num_rows)],
