@@ -1,6 +1,6 @@
 import taipy.gui.builder as tgb
 
-from algorithms.similarity_score_person import RetrieveSimilarNames
+from algorithms.similarity_score import RetrieveSimilarNames
 
 
 def look_for_person(state):

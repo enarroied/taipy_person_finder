@@ -1,4 +1,4 @@
-from src.algorithms.similarity_score_person import QueryRunner, RetrieveSimilarNames
+from src.algorithms.similarity_score import QueryRunner, RetrieveSimilarNames
 
 
 def test_render_query_includes_expected_values():

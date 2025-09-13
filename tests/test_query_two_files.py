@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.algorithms.similarity_score_person import (
+from src.algorithms.similarity_score import (
     RetrieveSimilarNamesForCSV,
     RetrieveSimilarNamesForParquet,
 )
@@ -76,7 +76,7 @@ class TestRetrieveSimilarNamesForCSV:
         assert exact_match["jaro_winkler_similarity_score"] == 1
 
     def test_csv_low_threshold_multiple_matches(self):
-        """Test CSV comparison with low threshold - 
+        """Test CSV comparison with low threshold -
         should find multiple similar matches"""
         primary_data = _create_test_data_source(
             ("John", "Doe"), ("Johnny", "Doe"), ("Jon", "Smith"), ("Xavier", "Zzz")
