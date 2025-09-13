@@ -1,7 +1,7 @@
 import pandas as pd
-from taipy.gui import Gui
-
 from pages import find_people_page, find_person_page, root
+
+from taipy.gui import Gui
 
 tool_pages = {
     "/": root,
@@ -19,6 +19,12 @@ if __name__ == "__main__":
 
     file_for_comparison = None
     df_people_for_comparison = None
+    show_dataset_selectors = False
+    dataset_colums = []
+    column_first_name = ""
+    column_last_name = ""
+    threshold_people = 0.90
+    df_similar_people = pd.DataFrame()
 
     gui = Gui(pages=tool_pages, css_file="./css/main.css")
     gui.run(
