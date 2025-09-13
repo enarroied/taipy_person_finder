@@ -1,7 +1,7 @@
 import pandas as pd
-from pages import find_people_page, find_person_page, root
-
 from taipy.gui import Gui
+
+from pages import find_people_page, find_person_page, root
 
 tool_pages = {
     "/": root,
