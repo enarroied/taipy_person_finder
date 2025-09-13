@@ -13,8 +13,10 @@ def _create_test_data_source(*people):
     """Helper to create test data.
     Usage: _create_test_data_source(('John', 'Doe'), ('Jane', 'Smith'))
     """
-    values = ", ".join([f"('{first}', '{last}')" for first, last in people])
-    return f"(SELECT * FROM (VALUES {values}) AS test_table(first_name, family_name))"
+    values = ", ".join([f"(1, '{first}', '{last}')" for first, last in people])
+    return (
+        f"(SELECT * FROM (VALUES {values}) AS test_table(id, first_name, family_name))"
+    )
 
 
 def _create_test_comparison_dataframe(*people):
@@ -68,7 +70,8 @@ class TestRetrieveSimilarNamesForCSV:
         # Should find John Doe match
         assert len(result) >= 1
         john_doe_matches = result[
-            (result["first_name"] == "John") & (result["family_name"] == "Doe")
+            (result["comparison_first_name"] == "John")
+            & (result["comparison_family_name"] == "Doe")
         ]
         assert len(john_doe_matches) > 0
 
@@ -193,13 +196,15 @@ class TestRetrieveSimilarNamesForParquet:
 
         # Check for John Doe match
         john_doe_matches = result[
-            (result["first_name"] == "John") & (result["family_name"] == "Doe")
+            (result["comparison_first_name"] == "John")
+            & (result["comparison_family_name"] == "Doe")
         ]
         assert len(john_doe_matches) > 0
 
         # Check for Michael Johnson match
         michael_matches = result[
-            (result["first_name"] == "Michael") & (result["family_name"] == "Johnson")
+            (result["comparison_first_name"] == "Michael")
+            & (result["comparison_family_name"] == "Johnson")
         ]
         assert len(michael_matches) > 0
 
@@ -247,10 +252,12 @@ class TestRetrieveSimilarNamesForParquet:
         assert len(result) >= 2  # At least some matches
 
         # Check that we have both primary names represented
-        primary_names = set(result["first_name"] + result["family_name"])
+        primary_names = set(
+            result["comparison_first_name"] + result["comparison_family_name"]
+        )
         assert "JohnDoe" in primary_names or (
-            "John" in result["first_name"].to_numpy()
-            and "Doe" in result["family_name"].to_numpy()
+            "John" in result["comparison_first_name"].to_numpy()
+            and "Doe" in result["comparison_family_name"].to_numpy()
         )
 
     def test_parquet_ordering_by_similarity(self):

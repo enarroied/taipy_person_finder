@@ -1,5 +1,7 @@
 SELECT 
-    data_source.*,
+    data_source.id AS id,
+    data_source.first_name AS first_name,
+    data_source.family_name AS last_name,
     input_data.{{ comparison_first_name }} AS comparison_first_name,
     input_data.{{ comparison_family_name }} AS comparison_family_name,
     jaro_winkler_similarity(
@@ -18,3 +20,4 @@ WHERE
     jaro_winkler_similarity_score > {{ threshold }}
 ORDER BY 
     jaro_winkler_similarity_score DESC
+LIMIT 50000
