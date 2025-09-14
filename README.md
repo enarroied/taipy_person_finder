@@ -1,11 +1,11 @@
-# Taipy Ferson Finder
+# Taipy Person Finder
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Python Version](https://img.shields.io/badge/Python-3.12-blue.svg)
 ![Taipy Version](https://img.shields.io/badge/Taipy-4.1-blue.svg)
 ![Duck DB](https://img.shields.io/badge/DuckDB-1.3-blue.svg)
-- [Taipy Ferson Finder](#taipy-ferson-finder)
+- [Taipy Person Finder](#taipy-person-finder)
   - [App Description](#app-description)
   - [Use Cases](#use-cases)
   - [Possible Improvements](#possible-improvements)
@@ -29,7 +29,7 @@ The application has two tabs. One tab lets users introduce a name (first name fo
 
 In both tabs, users can select a threshold value for the score similarity, between 0.8 and 1 (where 1 is an exact match).
 
-String similarity algorithms are computationally expensive and Python is notoriously slow for string comparison tasks. **Using DuckDB alllows to get the speed from its C++ engine**. This is a technique that fits in a batch process as well, but that will be for another project!
+String similarity algorithms are computationally expensive and Python is notoriously slow for string comparison tasks. **Using DuckDB allows to get the speed from its C++ engine**. This is a technique that fits in a batch process as well, but that will be for another project!
 
 ![GIF Image of Taipy Person Finder](img/app.gif)
 
@@ -47,11 +47,11 @@ Using a string similarity algorithm, the company can identify possible matches f
 
 ## Possible Improvements
 
-This application is a Proof Of Concept (POC) which I can enhance. Maybe I'll do that one day. The following are some ideas to imrpove it.
+This application is a Proof Of Concept (POC) which I can enhance. Maybe I'll do that one day. The following are some ideas to improve it.
 
 ### Warnings and limits on size
 
-I could add some notification warnings in case of large file input. Since the app performs a `CROSS JOIN`, this may take forever. I've tested a `50.000 x 50.000` lines operation, which amounts to 2.5 Billion rows , and it took a few minutes to perform the calculation, in a 16GB memory laptop.
+I could add some notification warnings in case of large file input. Since the app performs a `CROSS JOIN`, this may take forever. I've tested a `50.000 x 50.000` lines operation, which amounts to 2.5 Billion rows , and it took a few minutes to perform the calculation, in a 16 GB memory laptop.
 
 ### Introducing Filters
 
@@ -101,6 +101,6 @@ The favicon comes from [favicon.ico](https://favicon.io/), check them out!
 
 ## Video Presentation
 
-Here's a video presentation of the application (quality isn't good, I try to work on that for other times):
+Here's a video presentation of the application (quality isn't good, I'll try to work on that for other times):
 
 [![Taipy Person Finder Thumbnail for YouTube link](img/youtube.png)](https://youtu.be/AG90R9X45nQ)
