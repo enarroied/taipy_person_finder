@@ -1,7 +1,7 @@
+from algorithms import read_data_file, select_runner
+
 import taipy.gui.builder as tgb
 from taipy.gui import hold_control, notify, resume_control
-
-from algorithms import read_data_file, select_runner
 
 
 def _notify_file_failure(state, message):
@@ -88,11 +88,13 @@ with tgb.Page() as find_people_page:
                 "{column_first_name}",
                 lov="{dataset_colums}",
                 dropdown=True,
+                label="First Name",
             )
             tgb.selector(
                 "{column_last_name}",
                 lov="{dataset_colums}",
                 dropdown=True,
+                label="Last Name",
             )
             tgb.slider(
                 "{threshold_people}",
