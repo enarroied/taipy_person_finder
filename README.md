@@ -35,7 +35,7 @@ String similarity algorithms are computationally expensive and Python is notorio
 
 ## Use Cases
 
-Imagine a company that needs to identify people in their information system. They may have a list of people comming from a government agency, for compliance reasons. Or the list may come from a rejection process (imagine a database process that didn't find an exact match on id or other field).
+Imagine a company that needs to identify people in their information system. They may have a list of people coming from a government agency, for compliance reasons. Or the list may come from a rejection process (imagine a database process that didn't find an exact match on id or other field).
 
 A few reasons make exact name match difficult:
 
