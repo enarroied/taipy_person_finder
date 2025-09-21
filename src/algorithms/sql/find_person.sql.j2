@@ -1,17 +1,17 @@
 SELECT *,
     jaro_winkler_similarity(
-        LOWER(strip_accents('{{ person_name }}')), 
+        '{{ person_name }}', 
         name_for_comparison
     ) AS jaro_winkler_similarity_score,
     levenshtein(
-        LOWER(strip_accents('{{ person_name }}')), 
+        '{{ person_name }}', 
         name_for_comparison
     ) AS levenshtein_similarity_score
 FROM 
     {{ data_source }}
 WHERE 
     jaro_winkler_similarity(
-        LOWER(strip_accents('{{ person_name }}')), 
+        '{{ person_name }}', 
         name_for_comparison
     ) > {{ threshold }}
 ORDER BY jaro_winkler_similarity_score DESC
