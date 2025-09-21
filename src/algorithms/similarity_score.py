@@ -94,10 +94,9 @@ class RetrieveSimilarNames(QueryRunner):
         Returns:
             pd.DataFrame: Result of the SQL query, with all rows of the result.
         """
-        name_to_look_for = "".join(person_name.split())
         return self.execute(
             "find_person.sql.j2",
-            person_name=name_to_look_for,
+            person_name=person_name,
             threshold=threshold,
             data_source=data_source,
         )
