@@ -26,6 +26,7 @@ def _assign_bound_values(state, dataset_colums):
 
 def upload_file(state):
     with state as s:
+        s.df_similar_people = s.df_similar_people.head(0)
         try:
             people_for_comparison = get_columns_dataframe(s.file_for_comparison)
         except Exception:
