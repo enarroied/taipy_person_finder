@@ -21,7 +21,8 @@ def _create_test_data_source(*people):
             for first, last in people
         ]
     )
-    return f"(SELECT * FROM (VALUES {values}) AS test_table(first_name, family_name, name_for_comparison))"
+    return f"(SELECT * FROM (VALUES {values}) AS test_table(first_name,\
+          family_name, name_for_comparison))"
 
 
 def test_retrieve_similar_names_high_threshold():

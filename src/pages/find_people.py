@@ -1,7 +1,7 @@
-from algorithms import get_columns_dataframe, get_processor
-
 import taipy.gui.builder as tgb
 from taipy.gui import hold_control, notify, resume_control
+
+from algorithms import get_columns_dataframe, get_processor
 
 
 def _notify_file_failure(state, message):

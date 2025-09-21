@@ -7,6 +7,7 @@ app = marimo.App(width="medium")
 @app.cell
 def _():
     import marimo as mo
+
     return (mo,)
 
 
@@ -48,22 +49,23 @@ def _(pd, re, unicodedata):
         """Normalize name for comparison: lowercase, remove accents, trim, replace non-letters with dash"""
         if pd.isna(text) or text == "":
             return ""
-    
+
         text = str(text).lower().strip()
-    
-        text = unicodedata.normalize('NFD', text)
-        text = ''.join(char for char in text if unicodedata.category(char) != 'Mn')
-       
+
+        text = unicodedata.normalize("NFD", text)
+        text = "".join(char for char in text if unicodedata.category(char) != "Mn")
+
         # Replace non-letters with a dash
-        text = re.sub(r'[^a-z\s]', '-', text)
-    
+        text = re.sub(r"[^a-z\s]", "-", text)
+
         # Replace multiple spaces/dashes with a single dash
-        text = re.sub(r'[\s\-]+', '-', text)
-    
+        text = re.sub(r"[\s\-]+", "-", text)
+
         # Remove leading/trailing dashes
-        text = text.strip('-')
-    
+        text = text.strip("-")
+
         return text
+
     return (normalize_name,)
 
 
@@ -80,14 +82,12 @@ def _(fake, normalize_name, num_rows, pd):
         "email": [fake.email() for _ in range(num_rows)],
     }
 
-
     df_fake_data = pd.DataFrame(data)
 
     # Normalized data for column comparison
-    df_fake_data['name_for_comparison'] = (
-            df_fake_data['first_name'] + ' ' + df_fake_data['family_name']
-        ).apply(normalize_name)
-
+    df_fake_data["name_for_comparison"] = (
+        df_fake_data["first_name"] + " " + df_fake_data["family_name"]
+    ).apply(normalize_name)
 
     df_fake_data.to_parquet("../src/data/fake_data.parquet", index=False)
 

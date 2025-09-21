@@ -1,4 +1,5 @@
 from .file_and_model_selection import DataReaderFactory, FileProcessorFactory
+from .normalize_name import normalize_name as normalize_name
 from .similarity_score import RetrieveSimilarNames as RetrieveSimilarNames
 
 

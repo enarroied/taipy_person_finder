@@ -1,12 +1,13 @@
 import taipy.gui.builder as tgb
 
-from algorithms import RetrieveSimilarNames
+from algorithms import RetrieveSimilarNames, normalize_name
 
 
 def look_for_person(state):
     runner = RetrieveSimilarNames()
     with state as s:
-        df_similar_person = runner.run(s.person_name, s.threshold_person)
+        name = normalize_name(s.person_name)
+        df_similar_person = runner.run(name, s.threshold_person)
         df_similar_person["jaro_winkler_similarity_score"] = df_similar_person[
             "jaro_winkler_similarity_score"
         ].round(2)

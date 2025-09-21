@@ -2,6 +2,7 @@ import tempfile
 from pathlib import Path
 
 import pandas as pd
+
 from src.algorithms.similarity_score import (
     RetrieveSimilarNamesForCSV,
     RetrieveSimilarNamesForParquet,
@@ -18,7 +19,8 @@ def _create_test_data_source(*people):
             for first, last in people
         ]
     )
-    return f"(SELECT * FROM (VALUES {values}) AS test_table(id, first_name, family_name, name_for_comparison))"
+    return f"(SELECT * FROM (VALUES {values}) AS test_table(id, first_name,\
+          family_name, name_for_comparison))"
 
 
 def _create_test_comparison_dataframe(*people):
