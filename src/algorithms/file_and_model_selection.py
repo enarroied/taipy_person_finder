@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Type
 
 import pandas as pd
+import pyarrow.parquet as pq
 
 from .similarity_score import (
     RetrieveSimilarNamesForCSV,
@@ -44,8 +45,10 @@ class FileProcessorFactory:
 
 class DataReaderFactory:
     _readers: dict[str, callable] = {
-        ".csv": pd.read_csv,
-        ".parquet": pd.read_parquet,
+        ".csv": lambda path: pd.read_csv(path, nrows=0),
+        ".parquet": lambda path: pq.ParquetFile(path)
+        .schema_arrow.empty_table()
+        .to_pandas(),
     }
 
     @classmethod
@@ -54,7 +57,7 @@ class DataReaderFactory:
         cls._readers[extension.lower()] = reader
 
     @classmethod
-    def read_data(cls, file_path: str) -> pd.DataFrame:
+    def get_columns_dataframe(cls, file_path: str) -> pd.DataFrame:
         """Read data from a file into a DataFrame."""
         file_extension = cls._get_file_extension(file_path)
         reader = cls._readers.get(file_extension)

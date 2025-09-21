@@ -1,4 +1,4 @@
-from algorithms import get_processor, read_data
+from algorithms import get_columns_dataframe, get_processor
 
 import taipy.gui.builder as tgb
 from taipy.gui import hold_control, notify, resume_control
@@ -27,7 +27,7 @@ def _assign_bound_values(state, dataset_colums):
 def upload_file(state):
     with state as s:
         try:
-            people_for_comparison = read_data(s.file_for_comparison)
+            people_for_comparison = get_columns_dataframe(s.file_for_comparison)
         except Exception:
             _notify_file_failure(s, "The file can't be read.")
             return

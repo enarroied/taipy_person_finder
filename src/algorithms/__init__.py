@@ -3,8 +3,8 @@ from .similarity_score import RetrieveSimilarNames as RetrieveSimilarNames
 
 
 # Create convenience functions
-def read_data(file_path: str):
-    return DataReaderFactory.read_data(file_path)
+def get_columns_dataframe(file_path: str):
+    return DataReaderFactory.get_columns_dataframe(file_path)
 
 
 def get_processor(file_path: str):
