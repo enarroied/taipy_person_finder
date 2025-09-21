@@ -12,11 +12,16 @@ def test_render_query_includes_expected_values():
 
 
 def _create_test_data_source(*people):
-    """Helper to create test data.
+    """Helper to create test data with the necessary columns for the SQL query.
     Usage: _create_test_data_source(('John', 'Doe'), ('Jane', 'Smith'))
     """
-    values = ", ".join([f"('{first}', '{last}')" for first, last in people])
-    return f"(SELECT * FROM (VALUES {values}) AS test_table(first_name, family_name))"
+    values = ", ".join(
+        [
+            f"('{first}', '{last}', '{first.lower()}-{last.lower()}')"
+            for first, last in people
+        ]
+    )
+    return f"(SELECT * FROM (VALUES {values}) AS test_table(first_name, family_name, name_for_comparison))"
 
 
 def test_retrieve_similar_names_high_threshold():
@@ -24,9 +29,10 @@ def test_retrieve_similar_names_high_threshold():
     test_data = _create_test_data_source(
         ("John", "Doe"), ("Jane", "Smith"), ("Adam", "Johnson")
     )
+    print(test_data)
 
     retriever = RetrieveSimilarNames()
-    result = retriever.run("JohnDoe", 0.9, test_data)
+    result = retriever.run("john-doe", 0.9, test_data)
 
     # Should find John Doe (exact match when spaces removed)
     assert len(result) == 1
@@ -44,7 +50,7 @@ def test_retrieve_similar_names_low_threshold():
     )
 
     retriever = RetrieveSimilarNames()
-    result = retriever.run("JohnDoe", 0.3, test_data)
+    result = retriever.run("john-doe", 0.3, test_data)
 
     assert len(result) >= 2  # John Doe and Jon Do
     # Results should be ordered by similarity (best first)
@@ -55,6 +61,6 @@ def test_retrieve_similar_names_no_matches():
     """Test with no similar names"""
     test_data = _create_test_data_source(("Xavier", "Zzz"), ("Quincy", "Qwerty"))
     retriever = RetrieveSimilarNames()
-    result = retriever.run("JohnDoe", 0.5, test_data)
+    result = retriever.run("john_doe", 0.5, test_data)
 
     assert len(result) == 0

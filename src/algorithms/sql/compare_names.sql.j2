@@ -1,3 +1,19 @@
+CREATE MACRO IF NOT EXISTS normalize_name(text) AS 
+TRIM(
+    REGEXP_REPLACE(
+        REGEXP_REPLACE(
+            REGEXP_REPLACE(
+                LOWER(strip_accents(text)
+                ),
+                '[^a-z\s]', '-', 'g'
+            ),
+            '[\s\-]+', '-', 'g'
+        ),
+        '^-+|-+$', '', 'g'
+    ), 
+    '-'
+);
+
 SELECT 
     data_source.id AS id,
     data_source.first_name AS first_name,
@@ -5,12 +21,12 @@ SELECT
     input_data.{{ comparison_first_name }} AS comparison_first_name,
     input_data.{{ comparison_family_name }} AS comparison_family_name,
     jaro_winkler_similarity(
-        LOWER(strip_accents(data_source.first_name || data_source.family_name)), 
-        LOWER(strip_accents(input_data.{{ comparison_first_name }} || input_data.{{ comparison_family_name }}))
+        data_source.name_for_comparison,
+        normalize_name(input_data.{{ comparison_first_name }} ||'-'|| input_data.{{ comparison_family_name }})
     ) AS jaro_winkler_similarity_score,
     levenshtein(
-        LOWER(strip_accents(data_source.first_name || data_source.family_name)), 
-        LOWER(strip_accents(input_data.{{ comparison_first_name }} || input_data.{{ comparison_family_name }}))
+        data_source.name_for_comparison, 
+        normalize_name(input_data.{{ comparison_first_name }} ||'-'|| input_data.{{ comparison_family_name }})
     ) AS levenshtein_similarity_score
 FROM 
     {{ data_source }} data_source
@@ -18,8 +34,8 @@ CROSS JOIN
     {{ data_for_comparison }} input_data
 WHERE 
     jaro_winkler_similarity(
-        LOWER(strip_accents(data_source.first_name || data_source.family_name)), 
-        LOWER(strip_accents(input_data.{{ comparison_first_name }} || input_data.{{ comparison_family_name }}))
+        data_source.name_for_comparison,  
+        normalize_name(input_data.{{ comparison_first_name }} ||'-'|| input_data.{{ comparison_family_name }})
     ) > {{ threshold }}
 ORDER BY 
     jaro_winkler_similarity_score DESC

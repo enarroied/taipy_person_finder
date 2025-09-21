@@ -2,7 +2,6 @@ import tempfile
 from pathlib import Path
 
 import pandas as pd
-
 from src.algorithms.similarity_score import (
     RetrieveSimilarNamesForCSV,
     RetrieveSimilarNamesForParquet,
@@ -10,13 +9,16 @@ from src.algorithms.similarity_score import (
 
 
 def _create_test_data_source(*people):
-    """Helper to create test data.
+    """Helper to create test data with the necessary columns for the SQL query.
     Usage: _create_test_data_source(('John', 'Doe'), ('Jane', 'Smith'))
     """
-    values = ", ".join([f"(1, '{first}', '{last}')" for first, last in people])
-    return (
-        f"(SELECT * FROM (VALUES {values}) AS test_table(id, first_name, family_name))"
+    values = ", ".join(
+        [
+            f"(1, '{first}', '{last}', '{first.lower()}-{last.lower()}')"
+            for first, last in people
+        ]
     )
+    return f"(SELECT * FROM (VALUES {values}) AS test_table(id, first_name, family_name, name_for_comparison))"
 
 
 def _create_test_comparison_dataframe(*people):
