@@ -1,9 +1,9 @@
 import pandas as pd
-from taipy.gui import Gui
-
 from pages import find_people_page, find_person_page, root
 
-tool_pages = {
+from taipy.gui import Gui
+
+string_similarity_pages = {
     "/": root,
     "find_person": find_person_page,
     "find_people": find_people_page,
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     threshold_people = 0.90
     df_similar_people = pd.DataFrame()
 
-    gui = Gui(pages=tool_pages, css_file="./css/main.css")
+    gui = Gui(pages=string_similarity_pages, css_file="./css/main.css")
     gui.run(
         title="Taipy 🔎 Person Finder",
         favicon="./img/logo.png",
