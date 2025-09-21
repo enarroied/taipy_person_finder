@@ -1,3 +1,11 @@
-from .file_and_model_selection import read_data_file as read_data_file
-from .file_and_model_selection import select_runner as select_runner
+from .file_and_model_selection import DataReaderFactory, FileProcessorFactory
 from .similarity_score import RetrieveSimilarNames as RetrieveSimilarNames
+
+
+# Create convenience functions
+def read_data(file_path: str):
+    return DataReaderFactory.read_data(file_path)
+
+
+def get_processor(file_path: str):
+    return FileProcessorFactory.get_processor(file_path)

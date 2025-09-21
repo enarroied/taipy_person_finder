@@ -1,4 +1,4 @@
-from algorithms import read_data_file, select_runner
+from algorithms import get_processor, read_data
 
 import taipy.gui.builder as tgb
 from taipy.gui import hold_control, notify, resume_control
@@ -27,7 +27,7 @@ def _assign_bound_values(state, dataset_colums):
 def upload_file(state):
     with state as s:
         try:
-            people_for_comparison = read_data_file(s.file_for_comparison)
+            people_for_comparison = read_data(s.file_for_comparison)
         except Exception:
             _notify_file_failure(s, "The file can't be read.")
             return
@@ -41,7 +41,7 @@ def upload_file(state):
 def look_for_similar_people(state):
     with state as s:
         hold_control(s, message="Lookig for Similar People")
-        runner = select_runner(s.file_for_comparison)
+        runner = get_processor(s.file_for_comparison)
         df_similar_people = runner.run(
             data_for_comparison=s.file_for_comparison,
             comparison_first_name=s.column_first_name,
