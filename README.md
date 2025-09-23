@@ -82,7 +82,13 @@ uv run --directory src main.py
 The app provides a dockerfile. You can create an image with the following command (here, `finder-image` is the image name, you can give it any other name):
 
 ```bash
-docker build -t finder-image .
+docker build -t finder-app .
+```
+
+Then you can ruin the image:
+
+```bash
+docker run -p 5000:5000 finder-app
 ```
 
 ## Generate Fake Data
