@@ -56,11 +56,11 @@ I could add some notification warnings in case of large file input. Since the ap
 
 ### Introducing Filters
 
-In a company situation, we could introduce filters to restrict the comparison. We could compare certain subsets, for example, if we know we're looking for a woman, then filter all men out (this would increase speed and return more relevant results). Or filter by age (let's say, we're looking for retirred people).
+In a company situation, we could introduce filters to restrict the comparison. We could compare certain subsets, for example, if we know we're looking for a woman, then filter all men out (this would increase speed and return more relevant results). Or filter by age (let's say, we're looking for retired people).
 
 ### Allowing Better Inputs
 
-Right now, the app accepts parquet and CSV files, but it assumes that CSV files are comma-separated. Adding a separator check to use the appropriate method would be interesting.
+Right now, the app accepts parquet and CSV files, but it assumes that CSV files are comma-separated (to detect the column names, DuckDB should know how to read both formats). Adding a separator check to use the appropriate method would be interesting.
 
 ## Running the Application
 
