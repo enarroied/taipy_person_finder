@@ -18,6 +18,7 @@
   - [Generate Fake Data](#generate-fake-data)
   - [Favicon](#favicon)
   - [Video Presentation](#video-presentation)
+  - [Medium Article](#medium-article)
 
 App that uses DuckDB and string comparison methods.
 
@@ -110,3 +111,7 @@ The favicon comes from [favicon.ico](https://favicon.io/), check them out!
 Here's a video presentation of the application (quality isn't good, I'll try to work on that for other times):
 
 [![Taipy Person Finder Thumbnail for YouTube link](img/youtube.png)](https://youtu.be/AG90R9X45nQ)
+
+## Medium Article
+
+I wrote [an article on Medium](https://medium.com/gitconnected/how-to-create-a-fuzzy-matching-app-with-duckdb-and-taipy-3dc038083b53) about this application. The article is a tutorial on how to create the app.
