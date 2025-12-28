@@ -1,17 +1,17 @@
 SELECT *,
     jaro_winkler_similarity(
-        '{{ person_name }}', 
+        '{{ person_name }}',
         name_for_comparison
     ) AS jaro_winkler_similarity_score,
     levenshtein(
-        '{{ person_name }}', 
+        '{{ person_name }}',
         name_for_comparison
     ) AS levenshtein_similarity_score
-FROM 
+FROM
     {{ data_source }}
-WHERE 
+WHERE
     jaro_winkler_similarity(
-        '{{ person_name }}', 
+        '{{ person_name }}',
         name_for_comparison
     ) > {{ threshold }}
 ORDER BY jaro_winkler_similarity_score DESC

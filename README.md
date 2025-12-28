@@ -24,7 +24,7 @@ App that uses DuckDB and string comparison methods.
 
 ## App Description
 
-This application simulates a company search tool, that helps workers identify people in their information system using string similarity algorthms. The main algoritm used in this application is the [Jaro-Winkler string distance](https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance).  
+This application simulates a company search tool, that helps workers identify people in their information system using string similarity algorthms. The main algoritm used in this application is the [Jaro-Winkler string distance](https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance).
 
 The application has two tabs. One tab lets users introduce a name (first name followed by family name) and look for the person in a parquet file that simulates the company's information system. The second tab lets users upoad a file, that can be a CSV or parquet file, and look for all similar strings in the information system (using a `CROSS JOIN`).
 

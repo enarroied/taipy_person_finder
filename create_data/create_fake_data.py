@@ -32,7 +32,7 @@ def _(mo):
         """
     # Create datasets for the application
 
-    This notebook creates dataset files for the Taipy 🔎 Person Finder application. This application lets users look for a person in a dataset, using string similarity algorithms (Jaro-Winkler similarity, mainly; we might introduce others as well). 
+    This notebook creates dataset files for the Taipy 🔎 Person Finder application. This application lets users look for a person in a dataset, using string similarity algorithms (Jaro-Winkler similarity, mainly; we might introduce others as well).
     The application simulates a company with a large dataset of people coming from its information system. We code a Taipy application to let users look for people in the company dataset with two methods: by direct querying of the dataset (looking for one person in the dataset), or by uploading a file (CSV or parquet) and looking for a match.
 
     This notebook uses `Faker` to create the company dataset; it also generates two demonstration files (a CSV and a parquet file) to compare to the company data.

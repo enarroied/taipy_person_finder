@@ -1,4 +1,4 @@
-CREATE MACRO IF NOT EXISTS normalize_name(text) AS 
+CREATE MACRO IF NOT EXISTS normalize_name(text) AS
 TRIM(
     REGEXP_REPLACE(
         REGEXP_REPLACE(
@@ -10,12 +10,12 @@ TRIM(
             '[\s\-]+', '-', 'g'
         ),
         '^-+|-+$', '', 'g'
-    ), 
+    ),
     '-'
 );
 
 WITH input_data AS(
-    SELECT 
+    SELECT
         input_data.{{ comparison_first_name }} AS comparison_first_name,
         input_data.{{ comparison_family_name }} AS comparison_family_name,
         normalize_name(
@@ -23,7 +23,7 @@ WITH input_data AS(
             ) AS normalized_name
     FROM {{ data_for_comparison }} input_data
 )
-SELECT 
+SELECT
     data_source.id AS id,
     data_source.first_name AS first_name,
     data_source.family_name AS last_name,
@@ -34,18 +34,18 @@ SELECT
         input_data.normalized_name
     ) AS jaro_winkler_similarity_score,
     levenshtein(
-        data_source.name_for_comparison, 
+        data_source.name_for_comparison,
         input_data.normalized_name
     ) AS levenshtein_similarity_score
-FROM 
+FROM
     {{ data_source }} data_source
-CROSS JOIN 
+CROSS JOIN
     input_data
-WHERE 
+WHERE
     jaro_winkler_similarity(
-        data_source.name_for_comparison,  
+        data_source.name_for_comparison,
         input_data.normalized_name
     ) > {{ threshold }}
-ORDER BY 
+ORDER BY
     jaro_winkler_similarity_score DESC
 LIMIT 50000
