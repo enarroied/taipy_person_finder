@@ -11,6 +11,5 @@ extend-select = [
     "E501", #Line length
     "I"     #isort
 ]
-exclude = [
-    "create_data/*", # marimo markdown cells seem difficult to format
-]
+[lint.per-file-ignores]
+"create_data/*" = ["E501", "N803"]
