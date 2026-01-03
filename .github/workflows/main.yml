@@ -2,9 +2,9 @@ name: Project Health Check
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
   schedule:
     - cron: '0 0 * * 1' # Runs every Monday at midnight to check for new security bugs!
 
