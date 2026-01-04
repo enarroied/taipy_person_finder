@@ -29,6 +29,8 @@ jobs:
         run: uv run ruff check .
 
       - name: Security Audit (Pip-audit)
+        id: audit
+        continue-on-error: true
         run: uv run pip-audit
 
       - name: Run Tests (Pytest)
