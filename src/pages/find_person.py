@@ -1,17 +1,6 @@
 import taipy.gui.builder as tgb
 
-from algorithms import RetrieveSimilarNames, normalize_name
-
-
-def look_for_person(state):
-    runner = RetrieveSimilarNames()
-    with state as s:
-        name = normalize_name(s.person_name)
-        df_similar_person = runner.run(name, s.threshold_person)
-        df_similar_person["jaro_winkler_similarity_score"] = df_similar_person[
-            "jaro_winkler_similarity_score"
-        ].round(2)
-        s.df_similar_person = df_similar_person
+from callbacks.look_for_person_callback import look_for_person_callback
 
 
 with tgb.Page() as find_person_page:
@@ -27,7 +16,7 @@ with tgb.Page() as find_person_page:
             hover_text="Threshold for Jaro-Winkler Score",
         )
     tgb.button(
-        "Look for Person", on_action=look_for_person, class_name="fullwidth plain"
+        "Look for Person", on_action=look_for_person_callback, class_name="fullwidth plain"
     )
 
     with tgb.part():
