@@ -16,7 +16,9 @@ with tgb.Page() as find_person_page:
             hover_text="Threshold for Jaro-Winkler Score",
         )
     tgb.button(
-        "Look for Person", on_action=look_for_person_callback, class_name="fullwidth plain"
+        "Look for Person",
+        on_action=look_for_person_callback,
+        class_name="fullwidth plain",
     )
 
     with tgb.part():
