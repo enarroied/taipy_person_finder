@@ -1679,7 +1679,7 @@ wheels = [
 
 [[package]]
 name = "taipy"
-version = "4.1.0"
+version = "4.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cookiecutter" },
@@ -1687,9 +1687,9 @@ dependencies = [
     { name = "taipy-rest" },
     { name = "taipy-templates" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/84/c8/dc8a6ccc2ad3a51fb3783495c6f3ead08c784686a56000d463650f503536/taipy-4.1.0.tar.gz", hash = "sha256:86bad49c0f1c099750ab21002290883f8bfe1d4370243835abcc427a16c7aed2", size = 304133, upload-time = "2025-06-13T14:02:00.247Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/98/da/9dd7f97e919bbc0977f8357b68d29ac2ac550bfa0c4410562d8adc4719d8/taipy-4.1.1.tar.gz", hash = "sha256:ad1485884a772e7e3af0fe2e68de3a8d86464bf06c8d055a2c40f1589128f728", size = 304137, upload-time = "2026-02-16T14:50:05.758Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/4a/b1/43c79d705dcbc39bc25de7e71431e8826257526158e721f76fe233defb40/taipy-4.1.0-py3-none-any.whl", hash = "sha256:df093b521d498fca18f4b23050d73a9c25e53da9512ec05a86cb5d10591b0a94", size = 308561, upload-time = "2025-06-13T14:01:58.653Z" },
+    { url = "https://files.pythonhosted.org/packages/59/78/90e609a1ddb538636802c60650ea9e092e4fa2e5d4100877553f0ca76943/taipy-4.1.1-py3-none-any.whl", hash = "sha256:fb2d2cb659e593c79160d0af518cd70eff4b30bed26f801836f04ab7f311a851", size = 308555, upload-time = "2026-02-16T14:50:04.187Z" },
 ]
 
 [[package]]
@@ -1769,7 +1769,7 @@ requires-dist = [
     { name = "duckdb", specifier = "==1.4.3" },
     { name = "faker", specifier = "==40.1.2" },
     { name = "marimo", specifier = "==0.18.4" },
-    { name = "taipy", specifier = "==4.1.0" },
+    { name = "taipy", specifier = "==4.1.1" },
 ]
 
 [package.metadata.requires-dev]

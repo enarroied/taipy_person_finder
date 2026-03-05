@@ -5,6 +5,9 @@
 ![Python Version](https://img.shields.io/badge/Python-3.12-blue.svg)
 ![Taipy Version](https://img.shields.io/badge/Taipy-4.1-blue.svg)
 ![Duck DB](https://img.shields.io/badge/DuckDB-1.3-blue.svg)
+[![codecov](https://codecov.io/github/enarroied/taipy_person_finder/branch/master/graph/badge.svg?token=HLZVB6WFMT)](https://codecov.io/github/enarroied/taipy_person_finder)
+![Tests](https://github.com/enarroied/taipy_person_finder/actions/workflows/tests.yml/badge.svg)
+
 - [Taipy Person Finder](#taipy-person-finder)
   - [App Description](#app-description)
   - [Use Cases](#use-cases)
