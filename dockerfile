@@ -1,4 +1,4 @@
-# Dockerfile to create an image that runs taipy-tools
+# Dockerfile to create an image that runs taipy person finder
 # This is NOT a production-grade dockerfile and uses taipy's (flask)
 # default server.
 # This dockerfile uses uv to install and run the application.
