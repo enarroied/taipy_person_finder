@@ -2,7 +2,6 @@ import taipy.gui.builder as tgb
 
 from callbacks.look_for_person_callback import look_for_person_callback
 
-
 with tgb.Page() as find_person_page:
     tgb.text("## Find **Person** in Database", mode="md", class_name="color-primary")
     with tgb.layout("4 1"):

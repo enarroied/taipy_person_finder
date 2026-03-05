@@ -1,4 +1,5 @@
 import taipy.gui.builder as tgb
+
 from callbacks.find_people_callbacks import look_for_similar_people, upload_file
 
 with tgb.Page() as find_people_page:
